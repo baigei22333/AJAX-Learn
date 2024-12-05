@@ -60,3 +60,42 @@ document.querySelector('.btn').addEventListener('click', () => {
 // 5.1 准备 css 代码,并引入到js 中
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './index.css'
+
+/**
+ * 目标6：优化-提取 css 代码到单独的 css 文件中去
+ *  6.1 下载 mini-css-extract-plugin 本地软件包
+ *  6.2 配置 webpack.config.js 让 webpack 拥有该插件功能
+ *  6.3 打包后观察效果
+ */
+
+/**
+ * 目标7：优化-压缩 css 代码
+ *  7.1 下载 css-minimizer-webpack-plugin 本地软件包
+ *  7.2 配置 webpack.config.js 让 webpack 拥有该插件功能
+ *  7.3 打包后观察效果
+ */
+
+
+/**
+ * 目标8：打包 less 代码
+ *  8.1 新建 less 代码（设置背景图）并引入到 src/login/index.js 中
+ *  8.2 下载 less 和 less-loader 插件
+ *  8.3 配置 webpack.config.js 让 webpack 拥有该功能
+ *  8.4 打包后观察效果
+ */
+// 8.1 新建 less 代码（设置背景图）并引入到 src/login/index.js 中
+import './index.less'
+
+/**
+ * 目标9：打包资源模块（图片）
+ *  9.1 创建 img 标签并动态添加到页面，配置 webpack.config.js
+ *  9.2 打包后观察效果
+ */
+
+// 注意：js 中引入本地图片资源要用 import 方式(如果是网络图片http地址，字符串可以直接写)
+import imgObj from './assets/logo.png'
+
+const theImg = document.createElement('img')
+theImg.src = imgObj
+
+document.querySelector('.login-wrap').appendChild(theImg)
