@@ -24,23 +24,23 @@ console.log(checkCode('111'));
  */
 
 // 3.2 编写核心 JS 逻辑代码
-document.querySelector('.btn').addEventListener('click', () => {
-    const phone = document.querySelector('.login-form [name=mobile]').value
-    const code = document.querySelector('.login-form [name=code]').value
+// document.querySelector('.btn').addEventListener('click', () => {
+//     const phone = document.querySelector('.login-form [name=mobile]').value
+//     const code = document.querySelector('.login-form [name=code]').value
 
-    if (!checkPhone(phone)) {
-        console.log('手机号长度必须是11位');
-        return
-    }
+//     if (!checkPhone(phone)) {
+//         console.log('手机号长度必须是11位');
+//         return
+//     }
 
-    if (!checkCode(code)) {
-        console.log('验证码长度必须是6位');
-        return
-    }
+//     if (!checkCode(code)) {
+//         console.log('验证码长度必须是6位');
+//         return
+//     }
 
-    console.log('提及到服务器登录...');
+//     console.log('提及到服务器登录...');
 
-})
+// })
 
 /**
  * 目标4: 使用 html-webpack-plugin 插件生成html 网页文件,并引入打包后的其它资源
@@ -99,3 +99,43 @@ const theImg = document.createElement('img')
 theImg.src = imgObj
 
 document.querySelector('.login-wrap').appendChild(theImg)
+
+/**
+ * 目标10：完成登录功能
+ *  10.1 使用 npm 下载 axios 
+ *  10.2 准备并修改utils 工具包源代码导出实现函数
+ *  10.3 导入并编写逻辑代码，打包后运行观察
+ */
+import myAxios from '../utils/request.js'
+import { myAlert } from '../utils/alert.js'
+document.querySelector('.btn').addEventListener('click', () => {
+    const phone = document.querySelector('.login-form [name=mobile]').value
+    const code = document.querySelector('.login-form [name=code]').value
+
+    if (!checkPhone(phone)) {
+        // console.log('手机号长度必须是11位');
+        myAlert(false, '手机号长度必须是11位')
+        return
+    }
+
+    if (!checkCode(code)) {
+        // console.log('验证码长度必须是6位');
+        myAlert(false, '验证码长度必须是6位')
+        return
+    }
+
+    // console.log('提及到服务器登录...');
+    myAxios({
+        url: '/v1_0/authorizations',
+        method: 'post',
+        data: {
+            mobile: phone,
+            code: code
+        }
+    }).then(result => {
+        myAlert(true, '登录成功')
+    }).catch(error => {
+        myAlert(false, error.response.data.message)
+    })
+
+})
