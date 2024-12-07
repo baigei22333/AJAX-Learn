@@ -1,3 +1,4 @@
+import axios from '@/utils/request.js'
 // 权限插件（引入到了除登录页面，以外的其他所有页面）
 /**
  * 目标1：访问权限控制
